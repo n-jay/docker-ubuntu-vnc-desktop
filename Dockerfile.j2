@@ -98,6 +98,23 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /var/cache/apt/* /tmp/a.txt /tmp/b.txt
 
+# install wine
+RUN dpkg --add-architecture i386 && apt-get update \
+    && apt-get install -y wget && apt install -y gpg-agent \
+    && wget -qO - https://dl.winehq.org/wine-builds/winehq.key | apt-key add - \
+    && apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main' \
+    && add-apt-repository ppa:cybermax-dexter/sdl2-backport \
+    && apt install -y wine-stable \
+    && apt-get autoclean -y \
+    && apt-get autoremove -y
+
+# install lutris
+RUN add-apt-repository -y ppa:lutris-team/lutris \
+    && apt-get update \
+    && apt-get install -y lutris \
+    && apt-get autoclean -y \
+    && apt-get autoremove -y
+
 
 ################################################################################
 # builder
