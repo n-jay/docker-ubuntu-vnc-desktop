@@ -24,10 +24,11 @@ RUN apt update \
     && apt autoremove -y \
     && rm -rf /var/lib/apt/lists/*
 # install debs error if combine together
+# x11vnc=0.9.16-1
 RUN add-apt-repository -y ppa:fcwu-tw/apps \
     && apt update \
     && apt install -y --no-install-recommends --allow-unauthenticated \
-        xvfb x11vnc=0.9.16-1 \
+        xvfb x11vnc \   
         vim-tiny firefox chromium-browser ttf-ubuntu-font-family ttf-wqy-zenhei  \
     && add-apt-repository -r ppa:fcwu-tw/apps \
     && apt autoclean -y \
