@@ -118,5 +118,12 @@ EXPOSE 80
 WORKDIR /root
 ENV HOME=/home/ubuntu \
     SHELL=/bin/bash
+
+RUN useradd -u 10001 -ms /bin/bash newuser \
+    && echo "newuser ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/newuser
+USER newuser
+
+USER root
+
 HEALTHCHECK --interval=30s --timeout=5s CMD curl --fail http://127.0.0.1:6079/api/health
 ENTRYPOINT ["/startup.sh"]
