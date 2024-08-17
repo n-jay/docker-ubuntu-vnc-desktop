@@ -1,1 +1,2 @@
-Dockerfile.amd64
+FROM dorowu/ubuntu-desktop-lxde-vnc
+
